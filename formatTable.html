@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+  <title>Formats table</title>
+</head>
+
+<body>
+  <div id="content"></div>
+  <script>
+    // Number formatter
+    const nFormatter = (num, digits) => {
+      // Reference table
+      const lookup = [
+        { value: 1, symbol: "" },
+        { value: 1e3, symbol: "k" },
+        { value: 1e6, symbol: "M" },
+        { value: 1e9, symbol: "G" },
+        { value: 1e12, symbol: "T" },
+        { value: 1e15, symbol: "P" },
+        { value: 1e18, symbol: "E" }
+      ]
+      // Parse the number
+      const rx = /\.0+$|(\.[0-9]*[1-9])0+$/
+      // Look number format
+      var item = lookup.slice().reverse().find(function (item) {
+        return num >= item.value
+      })
+      // Return the formatted value
+      return item ? (num / item.value).toFixed(digits).replace(rx, "$1") + item.symbol : "0"
+    }
+
+    // Display table
+    const generateTable = (data, targetDiv) => {
+      const tableHeaders = data.columns.map(el => el['label'])
+      const tableData = data.data
+      const target = document.getElementById(targetDiv)
+      // Generate the html table
+      let tableHtml = `<table class="table">`
+        // Generate table header
+      let headerHtml = `<thead><tr>`
+      tableHeaders.forEach(head => {
+        headerHtml += `<th scope="col">${head}</th>`
+      })
+      headerHtml += `</tr></thead>`
+      tableHtml += headerHtml
+      // Generate table rows
+      tableData.forEach((row, idx) => {
+        let rowHtml = `<tr id="${idx}">`
+        row.forEach(cell => {
+          // Format each number cells with nFormatter function
+          if (typeof cell === "number") {
+            cell = nFormatter(cell, 1)
+          }
+          rowHtml += `<td>${cell}</td>`
+        })
+        rowHtml += `</tr>`
+        tableHtml += rowHtml
+      })
+      tableHtml += `</table>`
+      // Insert into target div
+      target.innerHTML = tableHtml
+    }
+
+    // Retrieve data and begin processing
+    const onMessage = (event) => {
+      if (event && event.data) {
+        generateTable(event.data, "content")
+        const tableRows = document.querySelectorAll('tr')
+        const resultName = event.data.resultName
+        for ( let i = 0; i < tableRows.length; i++) {
+          tableRows[i].addEventListener("click", event => clickHandler(event, resultName) )
+        }
+      }
+    }
+
+    // Handle click event in the table
+    const clickHandler = (event, resultName) => {
+      sendSelection(event.path[1].id, resultName)
+      var elements = document.querySelectorAll(".table-primary");
+      [].forEach.call(elements, function (el) {
+        el.classList.remove("table-primary");
+      });
+      document.getElementById(event.path[1].id).setAttribute("class", "table-primary")
+    }
+
+    // Send data back to the VA report
+    // Do not modify
+    const sendSelection = (selectedRow, resultName) => {
+      const selections = []
+      selections.push({ row: selectedRow });
+      const message = {
+        resultName: resultName,
+        selections: selections
+      }
+      sendMessage(message)
+    }
+
+    // sendMessage to VA
+    // Do not modify
+    const sendMessage = (message) => {
+      const url = (window.location != window.parent.location)
+      ? document.referrer
+      : document.location.href
+      window.parent.postMessage(message, url)
+    }
+
+    // Add event listener to check message from VA
+    // Do not modify
+    if (window.addEventListener) {
+      // For standards-compliant web browsers
+      window.addEventListener("message", onMessage, false)
+    } else {
+      window.attachEvent("onmessage", onMessage)
+    }
+  </script>
+</body>
+
+</html>
