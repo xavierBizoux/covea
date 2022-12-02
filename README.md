@@ -2,7 +2,7 @@
 
 ## Développer des rapports
 
-- ![Best Practice](https://communities.sas.com/html/assets/breports/know-your-audience.html)
+- [Best Practice](https://communities.sas.com/html/assets/breports/know-your-audience.html)
 
 ## Data-Driven Content
 
@@ -16,7 +16,7 @@
 
 ## Formats
 
-- Définir une librairie de formats dans Viya: ![blog](https://communities.sas.com/t5/SAS-Communities-Library/SAS-Viya-Managing-User-defined-Formats/ta-p/518884)
+- Définir une librairie de formats dans Viya: [blog](https://communities.sas.com/t5/SAS-Communities-Library/SAS-Viya-Managing-User-defined-Formats/ta-p/518884)
 - Créer un format dans une librairie existante:
 
   ```sas
