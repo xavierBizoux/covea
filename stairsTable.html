@@ -13,6 +13,27 @@
 <body>
   <div id="content"></div>
   <script>
+    // Number formatter
+    const nFormatter = (num, digits) => {
+      // Reference table
+      const lookup = [
+        { value: 1, symbol: "" },
+        { value: 1e3, symbol: "k" },
+        { value: 1e6, symbol: "M" },
+        { value: 1e9, symbol: "G" },
+        { value: 1e12, symbol: "T" },
+        { value: 1e15, symbol: "P" },
+        { value: 1e18, symbol: "E" }
+      ]
+      // Parse the number
+      const rx = /\.0+$|(\.[0-9]*[1-9])0+$/
+      // Look number format
+      var item = lookup.slice().reverse().find(function (item) {
+        return num >= item.value
+      })
+      // Return the formatted value
+      return item ? (num / item.value).toFixed(digits).replace(rx, "$1") + item.symbol : "0"
+    }
     // Structure data
     const structureData = (data, max) => {
       const tableData = []
@@ -40,6 +61,7 @@
     }
     // Display table
     const generateTable = (data, targetDiv) => {
+
       const { tableData, tableHeaders } = structureData(data, 12)
       const target = document.getElementById(targetDiv)
       let tableHtml = `<table class="table">`
@@ -52,8 +74,8 @@
       tableData.forEach(row => {
         let rowHtml = `<tr><td>${row.id}</td>`
         row.data.forEach(cell => {
-          const className = cell.predicted === 0 ? "table-secondary" : "table-primary"
-          rowHtml += `<td class="${className}">${cell.value}</td>`
+          const className = cell.predicted === 0 ? "table-warning" : "table-secondary"
+          rowHtml += `<td class="${className}">${nFormatter(cell.value, 2)}</td>`
         })
         rowHtml += `</tr>`
         tableHtml += rowHtml
