@@ -6,9 +6,13 @@
 
 ## Data-Driven Content
 
-- Example:
-  - [screenshot](./images/DDCExample.png)
-  - [Code](./formatTable.html)
+- Examples:
+  - Simple avec format numérique
+    - [Screenshot](./images/DDCExample.png)
+    - [Code](./formatTable.html)
+  - Tableau en escalier
+    - [Screenshot](./images/Stairs.png)
+    - [Code](./stairsTable.html)
 - [Documentation](https://go.documentation.sas.com/doc/en/vacdc/8.5/varef/n109mqtyl6quiun1mwfgtcn2s68b.htm)
 - [Bootstrap Framework](https://getbootstrap.com/)
 - [Apprendre HTML](https://www.w3schools.com/html/)
