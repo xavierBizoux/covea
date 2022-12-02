@@ -8,11 +8,11 @@
 
 - Example:
   - [screenshot](./images/DDCExample.png)
-  - ![Code](./formatTable.html)
-- ![Documentation](https://go.documentation.sas.com/doc/en/vacdc/8.5/varef/n109mqtyl6quiun1mwfgtcn2s68b.htm)
-- ![Bootstrap Framework](https://getbootstrap.com/)
-- ![Apprendre HTML](https://www.w3schools.com/html/)
-- ![Outil de développement HTML en ligne](https://jsfiddle.net/)
+  - [Code](./formatTable.html)
+- [Documentation](https://go.documentation.sas.com/doc/en/vacdc/8.5/varef/n109mqtyl6quiun1mwfgtcn2s68b.htm)
+- [Bootstrap Framework](https://getbootstrap.com/)
+- [Apprendre HTML](https://www.w3schools.com/html/)
+- [Outil de développement HTML en ligne](https://jsfiddle.net/)
 
 ## Formats
 
@@ -41,6 +41,6 @@
 
 ## Charger des tables en utilisant un job
 
-- ![Documentation](https://go.documentation.sas.com/doc/en/pgmsascdc/9.4_3.5/jobexecug/titlepage.htm )
+- [Documentation](https://go.documentation.sas.com/doc/en/pgmsascdc/9.4_3.5/jobexecug/titlepage.htm )
 - Code example: [blog](https://blogs.sas.com/content/sgf/2019/06/21/learn-the-three-easiest-ways-to-load-data-into-cas-tables/)
-- ![Filename filesrvc](https://go.documentation.sas.com/doc/en/pgmsascdc/9.4_3.5/lestmtsglobal/p0qapul7pyz9hmn0zfoefj0c278a.htm)
+- [Filename filesrvc](https://go.documentation.sas.com/doc/en/pgmsascdc/9.4_3.5/lestmtsglobal/p0qapul7pyz9hmn0zfoefj0c278a.htm)
