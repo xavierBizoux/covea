@@ -48,3 +48,20 @@
 - [Documentation](https://go.documentation.sas.com/doc/en/pgmsascdc/9.4_3.5/jobexecug/titlepage.htm )
 - Code example: [blog](https://blogs.sas.com/content/sgf/2019/06/21/learn-the-three-easiest-ways-to-load-data-into-cas-tables/)
 - [Filename filesrvc](https://go.documentation.sas.com/doc/en/pgmsascdc/9.4_3.5/lestmtsglobal/p0qapul7pyz9hmn0zfoefj0c278a.htm)
+- Sample code: load a table into CAS
+
+```sas
+filename import filesrvc "&_WEBIN_FILEURI";
+
+cas mySession sessopts=(caslib="casuser");
+libname casuser cas caslib="casuser";
+
+proc casutil;
+droptable casdata="import" quiet;
+run;
+proc import datafile=import out=casuser.import (promote=yes) dbms=csv;
+run;
+options obs=10;
+proc print data=casuser.import ;
+run;
+```
